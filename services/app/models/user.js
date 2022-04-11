@@ -1,7 +1,6 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
+const { hasPassword } = require("../helpers/bcrypt");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -13,17 +12,87 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  User.init({
-    fullname: DataTypes.STRING,
-    password: DataTypes.STRING,
-    email: DataTypes.STRING,
-    ktp: DataTypes.STRING,
-    phoneNumber: DataTypes.STRING,
-    address: DataTypes.STRING,
-    role: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'User',
-  });
+  User.init(
+    {
+      fullname: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: { msg: "Fullname is required!" },
+          notNull: { msg: "Fullname is required!" },
+        },
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [5, 10],
+          notNull: { msg: "Password is required!" },
+          notEmpty: { msg: "Password is required!" },
+        },
+      },
+      email: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        unique: true,
+        validate: {
+          notEmpty: { msg: "Email is required!" },
+          notNull: { msg: "Email is required!" },
+          isEmail: { msg: "Invalid email format!" },
+        },
+        unique: {
+          args: true,
+          msg: "Email must be unique!",
+        },
+      },
+      ktp: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        unique: true,
+        validate: {
+          notEmpty: { msg: "KTP is required!" },
+          notNull: { msg: "KTP is required!" },
+        },
+        unique: {
+          args: true,
+          msg: "Ktp already used!",
+        },
+      },
+      phoneNumber: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+          notNull: { msg: "phone number is required!" },
+          notEmpty: { msg: "phone number is required!" },
+        },
+        unique: {
+          args: true,
+          msg: "Phone Number already used!",
+        },
+      },
+      address: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "Address is required!" },
+          notEmpty: { msg: "Adress is required" },
+        },
+      },
+      role: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+    },
+    {
+      hooks: {
+        beforeCreate(instance, options) {
+          instance.password = hasPassword(instance.password);
+        },
+      },
+      sequelize,
+      modelName: "User",
+    }
+  );
   return User;
 };
