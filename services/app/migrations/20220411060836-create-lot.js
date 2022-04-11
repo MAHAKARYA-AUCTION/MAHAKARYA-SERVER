@@ -9,36 +9,63 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       description: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       size: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       aspectRatio: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       sellerId: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "Users",
+          },
+          key: "id",
+        },
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       },
       collectionId: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "Collections",
+          },
+          key: "id",
+        },
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       },
       primaryImage: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       secondImage: {
+        allowNull: true,
         type: Sequelize.STRING
       },
       thirdImage: {
+        allowNull: true,
         type: Sequelize.STRING
       },
       startingBid: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       artistName: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       createdAt: {

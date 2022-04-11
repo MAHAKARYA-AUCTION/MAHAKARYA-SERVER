@@ -9,15 +9,19 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       description: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       startDate: {
+        allowNull: false,
         type: Sequelize.DATE
       },
       endDate: {
+        allowNull: false,
         type: Sequelize.DATE
       },
       createdAt: {
