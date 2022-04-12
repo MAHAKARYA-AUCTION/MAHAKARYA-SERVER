@@ -1,0 +1,120 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "fullname": "User 1",
+      "email": "user1@email.com",
+      "password": "12345",
+      "ktp": "3321110902070001",
+      "phoneNumber": "0812345689",
+      "address": "rumah user 1",
+      "role": "user"
+    },
+    {
+      "id": 2,
+      "fullname": "User 2",
+      "email": "user2@email.com",
+      "password": "12345",
+      "ktp": "3321110902070002",
+      "phoneNumber": "0812345689",
+      "address": "rumah user 2",
+      "role": "user"
+    }
+  ],
+  "admins": [
+    {
+      "id": 1,
+      "name": "Admin 1",
+      "email": "admin1@email.com",
+      "password": "12345"
+    }
+  ],
+  "lots": [
+    {
+      "id": 1,
+      "name": "Interior of a Tailor's Shop",
+      "description": "Quiringh van Brekelenkam, Interior of a Tailor's Shop, 1653",
+      "size": "110 x 145 cm",
+      "aspectRatio": "",
+      "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/9/96/Quiringh_van_Brekelenkam_-_Interior_of_a_Tailor%27s_Shop_-_WGA03175.jpg",
+      "OpenBid": 5000000,
+      "artistName": "Quiringh van Brekelenkam",
+      "UserId": 1,
+      "CollectionId": 1
+    },
+    {
+      "id": 2,
+      "name": "Women Working on Pillow Lace",
+      "description": "Giacomo Ceruti, Women Working on Pillow Lace, 1720s",
+      "size": "110 x 145 cm",
+      "aspectRatio": "",
+      "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Giacomo_Ceruti_-_Women_Working_on_Pillow_Lace_%28The_Sewing_School%29_-_WGA4672.jpg/707px-Giacomo_Ceruti_-_Women_Working_on_Pillow_Lace_%28The_Sewing_School%29_-_WGA4672.jpg",
+      "OpenBid": 5000000,
+      "artistName": "Giacomo Ceruti",
+      "UserId": 1,
+      "CollectionId": 1
+    },
+    {
+      "id": 3,
+      "name": "The Widower",
+      "description": "Sir Luke Fildes, The Widower, 1876",
+      "size": "110 x 145 cm",
+      "aspectRatio": "",
+      "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Sir_Luke_Fildes_-_The_widower_-_Google_Art_Project.jpg/800px-Sir_Luke_Fildes_-_The_widower_-_Google_Art_Project.jpg",
+      "OpenBid": 5000000,
+      "artistName": "Sir Luke Fildes",
+      "UserId": 2,
+      "CollectionId": 1
+    },
+    {
+      "id": 4,
+      "name": "Sokea soittoniekka (Blind Musician)",
+      "description": "Alvar Cawén, Sokea soittoniekka (Blind Musician), 1922",
+      "size": "110 x 145 cm",
+      "aspectRatio": "",
+      "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Cawen_Alvar_Sokea_Soittoniekka_1922.JPG/747px-Cawen_Alvar_Sokea_Soittoniekka_1922.JPG",
+      "OpenBid": 5000000,
+      "artistName": "Alvar Cawén",
+      "UserId": 2,
+      "CollectionId": 2
+    },
+    {
+      "id": 5,
+      "name": "Elbe Bridge ",
+      "description": "Rolf Nesch, Elbe Bridge I",
+      "size": "110 x 145 cm",
+      "aspectRatio": "",
+      "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/2/26/Rolf-Nesch-Bro-Over-Elben.jpg",
+      "OpenBid": 5000000,
+      "artistName": "Rolf Nesch",
+      "UserId": 1,
+      "CollectionId": 2
+    },
+    {
+      "id": 6,
+      "name": "Die großen blauen Pferde (The Large Blue Horses)",
+      "description": "Franz Marc, Die großen blauen Pferde (The Large Blue Horses), 1911",
+      "size": "110 x 145 cm",
+      "aspectRatio": "",
+      "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Large_Blue_Horses.jpg/800px-Large_Blue_Horses.jpg",
+      "OpenBid": 5000000,
+      "artistName": "Franz Marc",
+      "UserId": 2,
+      "CollectionId": 2
+    }
+  ],
+  "collections": [
+    {
+      "id": 1,
+      "name": "Realism Collection",
+      "StartDate": "2022-04-21",
+      "EndDate": "2022-04-24"
+    },
+    {
+      "id": 2,
+      "name": "Expressionism Collections",
+      "StartDate": "2022-04-28",
+      "EndDate": "2022-05-01"
+    }
+  ]
+}
