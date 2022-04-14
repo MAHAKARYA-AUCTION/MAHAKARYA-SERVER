@@ -75,6 +75,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       CollectionId: DataTypes.INTEGER,
       primaryImage: {
+        allowNull: false,
         type: DataTypes.STRING,
         validate: {
           notEmpty: { msg: "Primary image is required" },
