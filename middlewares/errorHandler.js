@@ -2,7 +2,8 @@ function errorHandler(err, req, res, next) {
   let code = 500;
   let msg = "Internal erver error";
 
-  console.log(err.name);
+  console.log(err);
+  console.log("🚀 ~ file: errorHandler.js ~ line 6 ~ errorHandler ~ err.name", err.name);
   switch (err.name) {
     case "SequelizeUniqueConstraintError":
       (msg = "Email must be unique"), (code = 400);
