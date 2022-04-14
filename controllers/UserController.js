@@ -1,18 +1,22 @@
 const { compareHash } = require("../helpers/bcrypt");
 const { signToken } = require("../helpers/jwt");
-const { Admin } = require("../models/index");
+const { User } = require("../models/index");
 
-class AdminController {
+class UserController {
   static async register(req, res, next) {
     try {
-      const { username, email, password } = req.body;
+      const { username, email, password, ktp, phoneNumber, address, role } = req.body;
       const obj = {
         username,
         email,
         password,
+        ktp,
+        phoneNumber,
+        address,
+        role,
       };
-      const admin = await Admin.create(obj);
-      res.status(201).json(admin);
+      const user = await User.create(obj);
+      res.status(201).json(user);
     } catch (error) {
       next(error);
     }
@@ -23,27 +27,28 @@ class AdminController {
       const { email, password } = req.body;
       if (!email || !password) throw { name: "Invalid email/password" };
 
-      const admin = await Admin.findOne({
+      const user = await User.findOne({
         where: { email },
       });
 
-      if (!admin) throw { name: "Invalid email/password" };
+      if (!user) throw { name: "Invalid email/password" };
 
-      const checkPassword = compareHash(password, admin.password);
+      const checkPassword = compareHash(password, user.password);
 
       if (!checkPassword) throw { name: "Invalid email/password" };
 
       const payload = {
-        id: admin.id,
-        username: admin.username,
-        email: admin.email,
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        role: user.role,
       };
 
       const token = signToken(payload);
 
       res.status(200).json({
         message: "Login success",
-        admin: payload,
+        user: payload,
         access_token: token,
       });
     } catch (error) {
@@ -53,4 +58,4 @@ class AdminController {
   }
 }
 
-module.exports = AdminController;
+module.exports = UserController;
