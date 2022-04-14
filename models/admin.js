@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Admin.hasMany(models.Collections);
+      Admin.hasMany(models.Collection);
     }
   }
   Admin.init(
@@ -51,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  User.beforeCreate((instance, options) => {
+  Admin.beforeCreate((instance, options) => {
     instance.password = hashPassword(instance.password);
   });
 
