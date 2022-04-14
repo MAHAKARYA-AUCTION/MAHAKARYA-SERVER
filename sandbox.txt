@@ -1,0 +1,11 @@
+sequelize model:generate --name User --attributes username:string,email:string,password:string,ktp:string,phoneNumber:string,address:string,role:enum
+sequelize model:generate --name Admin --attributes username:string,email:string,password:string
+sequelize model:generate --name Collection --attributes name:string,imgUrl:string,description:text,startDate:date,endDate:date,AdminId:integer
+sequelize model:generate --name Lot --attributes name:string,description:text,width:integer,height:integer,size:string,startingBid:integer,SellerId:integer,CollectionId:integer,primaryImage:string,secondImage:string,thirdImage:string,fourthImage:string,artistName:string
+sequelize model:generate --name Transaction --attributes UserId:integer,LotId:integer,transactionNumber:string,status:enum,price:integer,type:enum
+sequelize model:generate --name Bid --attributes UserId:integer,LotId:integer,isHighest:boolean,bidPrice:integer
+
+sequelize seed:generate --name InsertUsers
+sequelize seed:generate --name InsertAdmins
+sequelize seed:generate --name InsertCollections
+sequelize seed:generate --name InsertLots
