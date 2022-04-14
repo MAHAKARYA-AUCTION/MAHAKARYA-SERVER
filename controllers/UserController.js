@@ -56,6 +56,39 @@ class UserController {
       next(error);
     }
   }
+
+  static async updateUserById(req, res, next) {
+    try {
+      const { id } = req.params;
+      const { username, password, ktp, phoneNumber, address } = req.body;
+
+      const user = await User.findByPk(id);
+      if (!user) throw { message: "Not found" };
+
+      const obj = {
+        username,
+        password,
+        ktp,
+        phoneNumber,
+        address,
+      };
+
+      await User.update(obj, { where: { id } });
+      res.status(200).json({ message: "Update success" });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async deleteUserById(req, res, next) {
+    try {
+      const { id } = req.params;
+      await User.destroy({ where: { id } });
+      res.status(200).json({ message: "Delete success" });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = UserController;

@@ -85,7 +85,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  User.beforeCreate((instance, options) => {
+  User.beforeValidate((instance, options) => {
     instance.password = hashPassword(instance.password);
   });
 
