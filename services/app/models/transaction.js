@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Transaction extends Model {
     /**
@@ -13,50 +11,53 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Transaction.init({
-    userId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        notNull:{ msg: "User Id is required!" },
-        notEmpty: { msg: "User Id is required!" }
-      }
-    },
-    lotId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        notNull:{ msg: "Lot Id is required!" },
-        notEmpty: { msg: "Lot Id is required!" }
-      }
-    },
-    transactionNumber: {
-      allowNull: false,
-      type: DataTypes.STRING,
-      validate: {
-        notEmpty: { msg: "Transaction Number is required!" },
-        notNull: { msg: "Transaction Number is required!" },
+  Transaction.init(
+    {
+      UserId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "User Id is required!" },
+          notEmpty: { msg: "User Id is required!" },
+        },
+      },
+      LotId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "Lot Id is required!" },
+          notEmpty: { msg: "Lot Id is required!" },
+        },
+      },
+      transactionNumber: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: { msg: "Transaction Number is required!" },
+          notNull: { msg: "Transaction Number is required!" },
+        },
+      },
+      status: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: { msg: "Status is required!" },
+          notNull: { msg: "Status is required!" },
+        },
+      },
+      price: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        validate: {
+          notEmpty: { msg: "Price is required!" },
+          notNull: { msg: "Price is required!" },
+        },
       },
     },
-    status: {
-      allowNull: false,
-      type: DataTypes.STRING,
-      validate: {
-        notEmpty: { msg: "Status is required!" },
-        notNull: { msg: "Status is required!" },
-      },
-    },
-    price: {
-      allowNull: false,
-      type: DataTypes.INTEGER,
-      validate: {
-        notEmpty: { msg: "Price is required!" },
-        notNull: { msg: "Price is required!" },
-      },
-    },
-  }, {
-    sequelize,
-    modelName: 'Transaction',
-  });
+    {
+      sequelize,
+      modelName: "Transaction",
+    }
+  );
   return Transaction;
 };

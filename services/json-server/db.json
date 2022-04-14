@@ -107,14 +107,14 @@
     {
       "id": 1,
       "name": "Realism Collection",
-      "StartDate": "2022-04-21",
-      "EndDate": "2022-04-24"
+      "startDate": "2022-04-21",
+      "endDate": "2022-04-24"
     },
     {
       "id": 2,
       "name": "Expressionism Collections",
-      "StartDate": "2022-04-28",
-      "EndDate": "2022-05-01"
+      "startDate": "2022-04-28",
+      "endDate": "2022-05-01"
     }
   ]
 }

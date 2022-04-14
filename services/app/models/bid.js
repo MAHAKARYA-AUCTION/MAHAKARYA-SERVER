@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Bid.init(
     {
-      userId: {
+      UserId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: { msg: "User Id is required!" },
         },
       },
-      lotId: {
+      LotId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
