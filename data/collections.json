@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Realism Collection",
+    "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/9/93/Gustave_Courbet_-_Bonjour_Monsieur_Courbet_-_Mus%C3%A9e_Fabre.jpg",
+    "description": "Realism in the arts is generally the attempt to represent subject matter truthfully, without artificiality and avoiding speculative fiction and supernatural elements. The term is often used interchangeably with naturalism, even though these terms are not synonymous.",
+    "startDate": "2022-04-15T09:00:00+0700",
+    "endDate": "2022-04-23T21:00:00+0700",
+    "AdminId": 1
+  },
+  {
+    "name": "Surrealism Collection",
+    "imgUrl": "https://awsimages.detik.net.id/community/media/visual/2021/02/23/lukisan-the-scream-karya-edvard-munch_43.jpeg?w=700&q=90",
+    "description": "Surrealism is a cultural movement that developed in Europe in the aftermath of World War I in which artists depicted unnerving, illogical scenes and developed techniques to allow the unconscious mind to express itself.",
+    "startDate": "2022-05-01T09:00:00+0700",
+    "endDate": "2022-05-15T21:00:00+0700",
+    "AdminId": 1
+  }
+]
