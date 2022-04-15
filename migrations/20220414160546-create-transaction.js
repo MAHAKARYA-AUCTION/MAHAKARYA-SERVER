@@ -19,7 +19,7 @@ module.exports = {
         onDelete: "cascade",
       },
       LotId: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER,
         references: {
           model: "Lots",

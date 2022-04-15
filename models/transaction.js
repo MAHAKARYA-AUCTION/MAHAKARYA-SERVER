@@ -24,11 +24,10 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       LotId: {
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.INTEGER,
         validate: {
           notEmpty: { msg: "Lot id is required" },
-          notNull: { msg: "Lot id is required" },
         },
       },
       transactionNumber: {
