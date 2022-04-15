@@ -83,7 +83,12 @@ class UserController {
   static async deleteUserById(req, res, next) {
     try {
       const { id } = req.params;
+
+      const user = await User.findByPk(id);
+      if (!user) throw { name: "Not found" };
+
       await User.destroy({ where: { id } });
+
       res.status(200).json({ message: "Delete success" });
     } catch (error) {
       next(error);
