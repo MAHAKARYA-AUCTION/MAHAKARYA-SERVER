@@ -56,7 +56,7 @@ class LotController {
       const { name, description, width, height, size, startingBid, primaryImage, secondImage, thirdImage, fourthImage, artistName } = req.body;
 
       const lot = await Lot.findByPk(id);
-      if (!lot) throw { message: "Not found" };
+      if (!lot) throw { name: "Not found" };
 
       const obj = {
         name,
