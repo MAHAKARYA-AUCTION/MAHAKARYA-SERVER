@@ -10,6 +10,7 @@ module.exports = {
       },
       username: {
         allowNull: false,
+        unique: true,
         type: Sequelize.STRING,
       },
       email: {
@@ -23,6 +24,7 @@ module.exports = {
       },
       ktp: {
         allowNull: false,
+        unique: true,
         type: Sequelize.STRING,
       },
       phoneNumber: {

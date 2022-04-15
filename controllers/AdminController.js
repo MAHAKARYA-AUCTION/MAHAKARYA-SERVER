@@ -21,7 +21,6 @@ class AdminController {
   static async login(req, res, next) {
     try {
       const { email, password } = req.body;
-      console.log(email, password);
       if (!email || !password) throw { name: "Invalid email/password" };
 
       const admin = await Admin.findOne({
@@ -44,7 +43,7 @@ class AdminController {
 
       res.status(200).json({
         message: "Login success",
-        user: payload,
+        admin: payload,
         access_token: token,
       });
     } catch (error) {
