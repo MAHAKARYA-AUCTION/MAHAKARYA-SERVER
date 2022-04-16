@@ -11,7 +11,6 @@
     "primaryImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/La_familia_de_Carlos_IV%2C_por_Francisco_de_Goya.jpg/718px-La_familia_de_Carlos_IV%2C_por_Francisco_de_Goya.jpg",
     "secondImage": "https://content3.cdnprado.net/imagenes/Documentos/imgsem/f4/f478/f47898fc-aa1c-48f6-a779-71759e417e74/22895596-99d8-4c8d-9bfc-e11871062072_832.jpg",
     "thirdImage": "https://www.larazon.es/resizer/dDynoclyswomDCUm1oddRNuunT4=/1800x1200/smart/filters:format(webp):quality(65)/cloudfront-eu-central-1.images.arcpublishing.com/larazon/MVFO4EUUM5CKPEGO66MZSJWNAI.jpg",
-    "fourthImage": "https://m.media-amazon.com/images/I/613+7KdbYTS._AC_SY450_.jpg",
     "artistName": "Francisco de Goya"
   },
   {
@@ -26,7 +25,6 @@
     "primaryImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Annibale_Carracci_-_Butcher%27s_Shop_-_WGA04409.jpg/800px-Annibale_Carracci_-_Butcher%27s_Shop_-_WGA04409.jpg",
     "secondImage": "https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/the-butcher-shop-annibale-carracci.jpg",
     "thirdImage": "https://m.media-amazon.com/images/I/81trYuG7-bL._AC_SX466_.jpg",
-    "fourthImage": "https://lh4.ggpht.com/FllKiZjnN2dBR5vQGrZs-EL5uEieFmXiZkvaYHygroIo-izsdiPHALDWzlnCLQ=s1200",
     "artistName": "Annibale Carracci"
   },
   {
@@ -41,7 +39,6 @@
     "primaryImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Brouwer%2C_Adriaen_-_Interior_of_a_Tavern_-_Google_Art_Project.jpg/779px-Brouwer%2C_Adriaen_-_Interior_of_a_Tavern_-_Google_Art_Project.jpg",
     "secondImage": null,
     "thirdImage": null,
-    "fourthImage": null,
     "artistName": "Adriaen Brouwer"
   },
   {
@@ -56,7 +53,6 @@
     "primaryImage": "https://upload.wikimedia.org/wikipedia/commons/1/1e/El_almuerzo%2C_by_Diego_Vel%C3%A1zquez.jpg",
     "secondImage": null,
     "thirdImage": null,
-    "fourthImage": null,
     "artistName": "Diego Velázquez"
   },
   {
@@ -71,7 +67,6 @@
     "primaryImage": "https://upload.wikimedia.org/wikipedia/commons/4/44/Giacomo_Ceruti_-_Women_Working_on_Pillow_Lace_%28The_Sewing_School%29_-_WGA4672.jpg",
     "secondImage": null,
     "thirdImage": null,
-    "fourthImage": null,
     "artistName": "Giacomo Ceruti"
   },
   {
@@ -86,7 +81,6 @@
     "primaryImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Sir_Luke_Fildes_-_The_widower_-_Google_Art_Project.jpg/800px-Sir_Luke_Fildes_-_The_widower_-_Google_Art_Project.jpg",
     "secondImage": null,
     "thirdImage": null,
-    "fourthImage": null,
     "artistName": "Luke Fildes"
   },
   {
@@ -101,7 +95,6 @@
     "primaryImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Albert_Edelfelt_-_The_Luxembourg_Gardens%2C_Paris.jpg/800px-Albert_Edelfelt_-_The_Luxembourg_Gardens%2C_Paris.jpg",
     "secondImage": null,
     "thirdImage": null,
-    "fourthImage": null,
     "artistName": "Albert Edelfelt"
   },
   {
@@ -116,7 +109,6 @@
     "primaryImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Honor%C3%A9_Daumier_032.jpg/774px-Honor%C3%A9_Daumier_032.jpg",
     "secondImage": null,
     "thirdImage": null,
-    "fourthImage": null,
     "artistName": "Honoré Daumier"
   },
   {
@@ -131,7 +123,6 @@
     "primaryImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Young_Girl_Reading_by_Jean-Baptiste-Camille_Corot_c1868.jpg/765px-Young_Girl_Reading_by_Jean-Baptiste-Camille_Corot_c1868.jpg",
     "secondImage": null,
     "thirdImage": null,
-    "fourthImage": null,
     "artistName": "Jean Baptiste Camille Corot"
   },
   {
@@ -146,7 +137,6 @@
     "primaryImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Wassilij_Grigorjewitsch_Perow_002.jpg/800px-Wassilij_Grigorjewitsch_Perow_002.jpg",
     "secondImage": null,
     "thirdImage": null,
-    "fourthImage": null,
     "artistName": "Vasily Perov"
   }
 ]

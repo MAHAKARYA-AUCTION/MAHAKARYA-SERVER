@@ -78,6 +78,8 @@ module.exports = (sequelize, DataTypes) => {
           notNull: { msg: "Role is required" },
         },
       },
+      balance: DataTypes.INTEGER,
+      balanceSpent: DataTypes.INTEGER,
     },
     {
       sequelize,
