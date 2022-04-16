@@ -27,4 +27,32 @@ const authN = async (req, res, next) => {
   }
 };
 
-module.exports = authN;
+const authZBuyer = async (req, res, next) => {
+  try {
+    const { role } = req.user;
+
+    if (role !== "buyer") throw { name: "Forbidden" };
+
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
+
+const authZSeller = async (req, res, next) => {
+  try {
+    const { role } = req.user;
+
+    if (role !== "seller") throw { name: "Forbidden" };
+
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = {
+  authN,
+  authZBuyer,
+  authZSeller,
+};
