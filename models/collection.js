@@ -55,6 +55,7 @@ module.exports = (sequelize, DataTypes) => {
           notNull: { msg: "End date is required" },
         },
       },
+      galleryName: DataTypes.ENUM("Goliath", "David"),
       AdminId: {
         allowNull: false,
         type: DataTypes.INTEGER,

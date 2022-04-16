@@ -84,7 +84,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       secondImage: DataTypes.STRING,
       thirdImage: DataTypes.STRING,
-      fourthImage: DataTypes.STRING,
       artistName: {
         allowNull: false,
         type: DataTypes.STRING,

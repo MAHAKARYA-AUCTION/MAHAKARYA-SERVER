@@ -23,13 +23,7 @@ module.exports = (sequelize, DataTypes) => {
           notNull: { msg: "User id is required" },
         },
       },
-      LotId: {
-        allowNull: true,
-        type: DataTypes.INTEGER,
-        validate: {
-          notEmpty: { msg: "Lot id is required" },
-        },
-      },
+      LotId: DataTypes.INTEGER,
       transactionNumber: {
         allowNull: false,
         type: DataTypes.STRING,
