@@ -49,17 +49,30 @@ class MidtransController {
           },
         });
         if (!transaction) {
-          throw new Error("cant find transaction");
+          throw new Error("transaction not found");
         }
-        if(transaction.status === 'success') {
-          throw new Error("transaction already settle")
+        if (transaction.status === "success") {
+          throw new Error("transaction already settle");
         }
         const user = await User.findOne({ where: { id: transaction.UserId } });
         if (!user) {
           throw new Error("cant find user");
         }
-       await user.update({ balance: user.balance + transaction.price })
-       await transaction.update({ status: 'success' })
+        await user.update({ balance: user.balance + transaction.price });
+        await transaction.update({ status: "success" });
+      } else if (
+        transaction_status === "cancel" ||
+        transaction_status === "expire"
+      ) {
+        let transaction = await Transaction.findOne({
+          where: {
+            transactionNumber: order_id,
+          },
+        });
+        if (!transaction) {
+          throw new Error("transaction not found");
+        }
+        await transaction.update({ status: "failed" });
       }
     } catch (err) {
       console.log(err);
