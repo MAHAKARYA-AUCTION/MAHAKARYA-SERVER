@@ -6,8 +6,6 @@ function errorHandler(err, req, res, next) {
   console.log("🚀 ~ file: errorHandler.js ~ line 6 ~ errorHandler ~ err.name", err.name);
   switch (err.name) {
     case "SequelizeUniqueConstraintError":
-      (msg = "Email must be unique"), (code = 400);
-      break;
     case "SequelizeValidationError":
       msg = err.errors[0].message;
       code = 400;
