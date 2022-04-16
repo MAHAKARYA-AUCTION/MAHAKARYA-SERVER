@@ -46,7 +46,7 @@ class LotController {
 
   static async addLot(req, res, next) {
     try {
-      const { name, description, width, height, size, startingBid, primaryImage, secondImage, thirdImage, fourthImage, artistName } = req.body;
+      const { name, description, width, height, size, startingBid, SellerId, primaryImage, secondImage, thirdImage, artistName } = req.body;
       const obj = {
         name,
         description,
@@ -54,11 +54,10 @@ class LotController {
         height,
         size,
         startingBid,
-        SellerId: req.user.id,
+        SellerId,
         primaryImage,
         secondImage,
         thirdImage,
-        fourthImage,
         artistName,
       };
 
@@ -73,7 +72,7 @@ class LotController {
   static async updateLotById(req, res, next) {
     try {
       const { id } = req.params;
-      const { name, description, width, height, size, startingBid, primaryImage, secondImage, thirdImage, fourthImage, artistName } = req.body;
+      const { name, description, width, height, size, startingBid, primaryImage, secondImage, thirdImage, artistName } = req.body;
 
       const lot = await Lot.findByPk(id);
       if (!lot) throw { name: "Not found" };
@@ -88,7 +87,6 @@ class LotController {
         primaryImage,
         secondImage,
         thirdImage,
-        fourthImage,
         artistName,
       };
 

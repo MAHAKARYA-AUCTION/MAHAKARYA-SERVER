@@ -1,7 +1,7 @@
 const { verifyToken } = require("../helpers/jwt");
-const { User } = require("../models/index");
+const { User, Admin } = require("../models/index");
 
-const authN = async (req, res, next) => {
+const authNUser = async (req, res, next) => {
   try {
     const { access_token } = req.headers;
     if (!access_token) throw { name: "JsonWebTokenError" };
@@ -19,6 +19,32 @@ const authN = async (req, res, next) => {
       username: user.username,
       email: user.email,
       role: user.role,
+    };
+
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
+
+const authNAdmin = async (req, res, next) => {
+  try {
+    const { access_token } = req.headers;
+    if (!access_token) throw { name: "JsonWebTokenError" };
+
+    const payload = verifyToken(access_token);
+
+    if (!payload) throw { name: "JsonWebTokenError" };
+
+    const admin = await Admin.findOne({ where: { id: payload.id, email: payload.email } });
+
+    if (!admin) throw { name: "JsonWebTokenError" };
+
+    req.user = {
+      id: admin.id,
+      username: admin.username,
+      email: admin.email,
+      role: "admin",
     };
 
     next();
@@ -51,8 +77,23 @@ const authZSeller = async (req, res, next) => {
   }
 };
 
+const authZAdmin = async (req, res, next) => {
+  try {
+    const { role } = req.user;
+    console.log(req.user);
+
+    if (role !== "admin") throw { name: "Forbidden" };
+
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
-  authN,
+  authNUser,
+  authNAdmin,
   authZBuyer,
   authZSeller,
+  authZAdmin,
 };
