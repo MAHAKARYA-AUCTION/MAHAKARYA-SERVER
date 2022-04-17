@@ -6,49 +6,52 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
       name: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
       imgUrl: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
       description: {
         allowNull: false,
-        type: Sequelize.TEXT,
+        type: Sequelize.TEXT
       },
       startDate: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.DATE
       },
       endDate: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.DATE
       },
       AdminId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: "Admins",
-          key: "id",
+          key: "id"
         },
         onUpdate: "cascade",
-        onDelete: "cascade",
+        onDelete: "cascade"
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-      },
+        type: Sequelize.DATE
+      }
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable("Collections");
-  },
+    await queryInterface.sequelize.query(
+      'DROP TYPE "enum_Collections_galleryName";'
+    );
+  }
 };
