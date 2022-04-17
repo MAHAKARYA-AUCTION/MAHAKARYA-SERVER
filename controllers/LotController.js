@@ -44,9 +44,40 @@ class LotController {
     }
   }
 
+  static async fetchLotsByCollectionId(req, res, next) {
+    try {
+      const { CollectionId } = req.params;
+      let { name, artistName, startingBid } = req.query;
+      let orderBy;
+
+      if (!name) name = "";
+      if (!artistName) artistName = "";
+      if (!startingBid) {
+        orderBy = ["id", "ASC"];
+      } else if (startingBid === "ASC") {
+        orderBy = ["startingBid", "ASC"];
+      } else {
+        orderBy = ["startingBid", "DESC"];
+      }
+
+      const lots = await Lot.findAll({
+        where: {
+          CollectionId,
+          name: { [Op.iLike]: `%${name}%` },
+          artistName: { [Op.iLike]: `%${artistName}%` },
+        },
+        order: [orderBy],
+      });
+
+      res.status(200).json(lots);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async addLot(req, res, next) {
     try {
-      const { name, description, width, height, size, startingBid, primaryImage, secondImage, thirdImage, fourthImage, artistName } = req.body;
+      const { name, description, width, height, size, startingBid, SellerId, primaryImage, secondImage, thirdImage, artistName } = req.body;
       const obj = {
         name,
         description,
@@ -54,11 +85,10 @@ class LotController {
         height,
         size,
         startingBid,
-        SellerId: req.user.id,
+        SellerId,
         primaryImage,
         secondImage,
         thirdImage,
-        fourthImage,
         artistName,
       };
 
@@ -73,7 +103,7 @@ class LotController {
   static async updateLotById(req, res, next) {
     try {
       const { id } = req.params;
-      const { name, description, width, height, size, startingBid, primaryImage, secondImage, thirdImage, fourthImage, artistName } = req.body;
+      const { name, description, width, height, size, startingBid, primaryImage, secondImage, thirdImage, artistName } = req.body;
 
       const lot = await Lot.findByPk(id);
       if (!lot) throw { name: "Not found" };
@@ -88,7 +118,6 @@ class LotController {
         primaryImage,
         secondImage,
         thirdImage,
-        fourthImage,
         artistName,
       };
 

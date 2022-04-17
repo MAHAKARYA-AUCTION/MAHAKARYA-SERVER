@@ -71,6 +71,21 @@ class CollectionController {
     }
   }
 
+  static async updateCollectionGalleryName(req, res, next) {
+    try {
+      const { id } = req.params;
+      const { galleryName } = req.body;
+
+      const collection = await Collection.findByPk(id);
+      if (!collection) throw { name: "Not found" };
+
+      await Collection.update({ galleryName }, { where: { id } });
+      res.status(200).json({ message: "Update success" });
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async deleteCollectionById(req, res, next) {
     try {
       const { id } = req.params;
