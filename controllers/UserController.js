@@ -32,6 +32,7 @@ class UserController {
       });
 
       if (!user) throw { name: "Invalid email/password" };
+      if (user.role !== "buyer") throw { name: "Forbidden" };
 
       const checkPassword = compareHash(password, user.password);
 
@@ -52,7 +53,6 @@ class UserController {
         access_token: token,
       });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
