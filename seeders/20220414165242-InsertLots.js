@@ -7,6 +7,7 @@ module.exports = {
     data.forEach((el) => {
       el.createdAt = new Date();
       el.updatedAt = new Date();
+      el.size = `${el.width} x ${el.height} cm`;
     });
 
     await queryInterface.bulkInsert("Lots", data, {});
