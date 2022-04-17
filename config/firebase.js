@@ -6,4 +6,4 @@ firebase.initializeApp({
   credential: firebase.credential.cert(serviceAccount)
 });
 const firestore = getFirestore();
-export default firestore;
+module.exports = firestore;

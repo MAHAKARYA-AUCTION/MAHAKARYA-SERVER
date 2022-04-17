@@ -1,5 +1,5 @@
 const { User } = require("../models/index");
-import firestore from "./config/firebase";
+const firestore = require("../config/firebase");
 
 class AuctionController {
   static async bidAuction(req, res, next) {
