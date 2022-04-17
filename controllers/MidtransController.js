@@ -1,6 +1,7 @@
 const midtransClient = require("midtrans-client");
 const { Transaction, User } = require("../models");
 require("dotenv").config();
+const nodemailer = require('nodemailer')
 // const server_key = process.env.SERVER_MIDTRANS;
 // const client_key = process.env.CLIENT_MIDTRANS;
 // const base64 = require('base-64')
@@ -60,6 +61,30 @@ class MidtransController {
         }
         await user.update({ balance: user.balance + transaction.price });
         await transaction.update({ status: "success" });
+        
+        const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth:{
+            user: 'mahakaryaauction@gmail.com',
+            pass: 'finalprojectp3!',
+          }
+        })
+        
+        const options = {
+          from: 'mahakaryaauction@gmail.com',
+          to: `${user.email}`,
+          subject: `Topup balance success`,
+          text: `pelanggan ${user.username} telah berhasil topup seharga ${transaction.price} dengan nomor transaksi ${order_id}`
+        }
+        
+        transporter.sendMail(options, function(err, info) {
+          if(err){
+            console.log(err);
+            return;
+          }
+          console.log("sent: "+ info.response);
+        })
+
       } else if (
         transaction_status === "cancel" ||
         transaction_status === "expire"
