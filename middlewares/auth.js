@@ -80,7 +80,6 @@ const authZSeller = async (req, res, next) => {
 const authZAdmin = async (req, res, next) => {
   try {
     const { role } = req.user;
-    console.log(req.user);
 
     if (role !== "admin") throw { name: "Forbidden" };
 
