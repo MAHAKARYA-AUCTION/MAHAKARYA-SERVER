@@ -1,4 +1,4 @@
-const { Lot, Collection } = require("../models/index");
+const { Lot, Collection, User } = require("../models/index");
 const { Op } = require("sequelize");
 
 class LotController {
@@ -34,7 +34,7 @@ class LotController {
     try {
       const { id } = req.params;
 
-      const lot = await Lot.findOne({ where: { id } });
+      const lot = await Lot.findOne({ include: [{ model: Collection }, { model: User }], where: { id } });
 
       if (!lot) throw { name: "Not found" };
 
