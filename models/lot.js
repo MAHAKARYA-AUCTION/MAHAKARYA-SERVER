@@ -92,6 +92,7 @@ module.exports = (sequelize, DataTypes) => {
           notNull: { msg: "Artist name is required" },
         },
       },
+      lotNumber: DataTypes.INTEGER,
     },
     {
       sequelize,
