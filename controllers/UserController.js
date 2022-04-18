@@ -1,6 +1,7 @@
 const { compareHash } = require("../helpers/bcrypt");
 const { signToken } = require("../helpers/jwt");
-const { User } = require("../models/index");
+const { User, Transaction } = require("../models/index");
+const { hashPassword } = require('../helpers/bcrypt')
 
 class UserController {
   static async register(req, res, next) {
@@ -60,18 +61,23 @@ class UserController {
   static async updateUserById(req, res, next) {
     try {
       const { id } = req.params;
-      const { username, password, ktp, phoneNumber, address } = req.body;
+      const { username, email, password, phoneNumber, address } = req.body;
 
       const user = await User.findByPk(id);
       if (!user) throw { message: "Not found" };
 
       const obj = {
         username,
-        password,
-        ktp,
+        email,
+        ktp: user.ktp,
         phoneNumber,
         address,
+        role: user.role,
       };
+      
+      if(password) {
+        obj.password = hashPassword(password)
+      }
 
       await User.update(obj, { where: { id } });
       res.status(200).json({ message: "Update success" });
@@ -92,6 +98,20 @@ class UserController {
       res.status(200).json({ message: "Delete success" });
     } catch (error) {
       next(error);
+    }
+  }
+
+  static async getUserById(req, res, next) {
+    try {
+      const { id } = req.params;
+
+      const user = await User.findByPk(id, {
+        include: [{ model: Transaction }]});
+      if(!user) throw { name: "Not found" };
+      
+      res.status(200).json(user)
+    } catch (error) {
+      next(error)
     }
   }
 }
