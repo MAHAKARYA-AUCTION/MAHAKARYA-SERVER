@@ -65,7 +65,10 @@ class AuctionController {
 
       const highestRef = firestore.collection("HighestBid").doc(lotId);
       await highestRef.set({
-        bidID
+        bidID,
+        price: +sum,
+        userId: +userId,
+        username: user.username
       });
 
       res.status(200).json({ msg: "Success Bid" });

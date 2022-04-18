@@ -1,18 +1,20 @@
 [
   {
     "name": "Realism",
-    "imgUrl": "https://mahakarya-auction.s3.ap-southeast-1.amazonaws.com/painting/collection-1.jpg",
+    "imgUrl": "https://res.cloudinary.com/mahakarya/image/upload/v1650263195/paintings/collection-1_z7bs82.jpg",
     "description": "Realism in the arts is generally the attempt to represent subject matter truthfully, without artificiality and avoiding speculative fiction and supernatural elements. The term is often used interchangeably with naturalism, even though these terms are not synonymous.",
     "startDate": "2022-04-15T09:00:00+0700",
     "endDate": "2022-04-23T21:00:00+0700",
+    "galleryName": "goliath-gallery",
     "AdminId": 1
   },
   {
     "name": "Surrealism",
-    "imgUrl": "https://mahakarya-auction.s3.ap-southeast-1.amazonaws.com/painting/collection-2.jpg",
+    "imgUrl": "https://res.cloudinary.com/mahakarya/image/upload/v1650263195/paintings/collection-2_m4oqre.jpg",
     "description": "Surrealism is a cultural movement that developed in Europe in the aftermath of World War I in which artists depicted unnerving, illogical scenes and developed techniques to allow the unconscious mind to express itself.",
     "startDate": "2022-05-01T09:00:00+0700",
     "endDate": "2022-05-15T21:00:00+0700",
+    "galleryName": "david-gallery",
     "AdminId": 1
   }
 ]

@@ -1,6 +1,6 @@
 function errorHandler(err, req, res, next) {
   let code = 500;
-  let msg = "Internal erver error";
+  let msg = "Internal server error";
 
   console.log(err);
   console.log("🚀 ~ file: errorHandler.js ~ line 6 ~ errorHandler ~ err.name", err.name);
