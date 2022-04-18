@@ -2,7 +2,7 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.addColumn("Collections", "galleryName", Sequelize.ENUM("Goliath", "David"));
+    await queryInterface.addColumn("Collections", "galleryName", Sequelize.ENUM("goliath-gallery", "david-gallery"));
   },
 
   async down(queryInterface, Sequelize) {

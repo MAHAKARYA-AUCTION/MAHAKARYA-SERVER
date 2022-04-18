@@ -51,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Admin.beforeValidate((instance, options) => {
+  Admin.beforeCreate((instance, options) => {
     instance.password = hashPassword(instance.password);
   });
 
