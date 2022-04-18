@@ -4,7 +4,7 @@
     "email": "seller1@email.com",
     "password": "12345",
     "ktp": "3321110902070002",
-    "phoneNumber": "0812345689",
+    "phoneNumber": "08123456789",
     "address": "Rumah Seller 1",
     "role": "seller"
   },
@@ -13,7 +13,7 @@
     "email": "seller2@email.com",
     "password": "12345",
     "ktp": "3321060902150009",
-    "phoneNumber": "0812345689",
+    "phoneNumber": "08123456789",
     "address": "Rumah Seller 2",
     "role": "seller"
   },
@@ -22,7 +22,7 @@
     "email": "buyer1@email.com",
     "password": "12345",
     "ktp": "3305040901072053",
-    "phoneNumber": "0812345689",
+    "phoneNumber": "08123456789",
     "address": "Rumah Buyer 1",
     "role": "buyer"
   },
@@ -31,7 +31,7 @@
     "email": "buyer2@email.com",
     "password": "12345",
     "ktp": "3321062311110003",
-    "phoneNumber": "0812345689",
+    "phoneNumber": "08123456789",
     "address": "Rumah Buyer 2",
     "role": "buyer"
   }

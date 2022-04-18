@@ -1,4 +1,4 @@
-const { Lot } = require("../models/index");
+const { Lot, Collection } = require("../models/index");
 const { Op } = require("sequelize");
 
 class LotController {
@@ -77,7 +77,13 @@ class LotController {
 
   static async addLot(req, res, next) {
     try {
-      const { name, description, width, height, startingBid, SellerId, primaryImage, secondImage, thirdImage, artistName } = req.body;
+      const { name, description, width, height, startingBid, SellerId, CollectionId, primaryImage, secondImage, thirdImage, artistName } = req.body;
+
+      const collection = await Collection.findByPk(CollectionId);
+      if (!collection) throw { name: "Collection not found" };
+
+      const totalLots = await Lot.findAll({ where: { CollectionId } });
+
       const obj = {
         name,
         description,
@@ -86,10 +92,12 @@ class LotController {
         size: `${width} x ${height} cm`,
         startingBid,
         SellerId,
+        CollectionId,
         primaryImage,
         secondImage,
         thirdImage,
         artistName,
+        lotNumber: totalLots.length + 1,
       };
 
       const lot = await Lot.create(obj);

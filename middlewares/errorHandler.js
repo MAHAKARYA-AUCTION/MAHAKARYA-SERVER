@@ -28,6 +28,10 @@ function errorHandler(err, req, res, next) {
       msg = "Data not found";
       code = 404;
       break;
+    case "Collection not found":
+      msg = "Collection not found";
+      code = 404;
+      break;
   }
 
   res.status(code).json({ message: msg });

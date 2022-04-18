@@ -22,8 +22,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         validate: {
           notEmpty: { msg: "Username is required" },
-          notNull: { msg: "Username is required" }
-        }
+          notNull: { msg: "Username is required" },
+        },
       },
       email: {
         allowNull: false,
@@ -31,8 +31,8 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notEmpty: { msg: "Email is required" },
           notNull: { msg: "Email is required" },
-          isEmail: { msg: "Invalid email format" }
-        }
+          isEmail: { msg: "Invalid email format" },
+        },
       },
       password: {
         allowNull: false,
@@ -42,48 +42,52 @@ module.exports = (sequelize, DataTypes) => {
           notNull: { msg: "Password is required" },
           len: {
             args: 5,
-            msg: "Password must be at least 5 characters"
-          }
-        }
+            msg: "Password must be at least 5 characters",
+          },
+        },
       },
       ktp: {
         allowNull: false,
         type: DataTypes.STRING,
         validate: {
           notEmpty: { msg: "KTP number is required" },
-          notNull: { msg: "KTP number is required" }
-        }
+          notNull: { msg: "KTP number is required" },
+          len: {
+            args: [16, 16],
+            msg: "KTP number must be 16 characters",
+          },
+        },
       },
       phoneNumber: {
         allowNull: false,
         type: DataTypes.STRING,
         validate: {
           notEmpty: { msg: "Phone number is required" },
-          notNull: { msg: "Phone number is required" }
-        }
+          notNull: { msg: "Phone number is required" },
+        },
       },
       address: {
         allowNull: false,
         type: DataTypes.STRING,
         validate: {
           notEmpty: { msg: "Address is required" },
-          notNull: { msg: "Address is required" }
-        }
+          notNull: { msg: "Address is required" },
+        },
       },
       role: {
         allowNull: false,
         type: DataTypes.ENUM("seller", "buyer"),
         validate: {
           notEmpty: { msg: "Role is required" },
-          notNull: { msg: "Role is required" }
-        }
+          notNull: { msg: "Role is required" },
+        },
       },
       balance: DataTypes.INTEGER,
-      balanceSpent: DataTypes.INTEGER
+      balanceSpent: DataTypes.INTEGER,
     },
     {
       sequelize,
-      modelName: "User"
+      modelName: "User",
     }
   );
 
