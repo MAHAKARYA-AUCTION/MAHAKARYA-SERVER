@@ -4,6 +4,7 @@ const { Transaction, User } = require("../models");
 const { response } = require("../app");
 
 const user = {
+  id: 1,
   username: "usertest",
   email: "usertest@email.com",
   password: "password",
@@ -12,60 +13,59 @@ const user = {
   address: "usertest address",
   role: "buyer",
 };
+const user1 = {
+  id: 2,
+  username: "usertests",
+  email: "usertests@email.com",
+  password: "passwords",
+  ktp: "1111111111111112",
+  phoneNumber: "081234567891",
+  address: "usertest addresss",
+  role: "buyer",
+};
+const user2 = {
+  id: 9999,
+  username: "usertestss",
+  email: "usertestss@email.com",
+  password: "passwordss",
+  ktp: "1111111111111113",
+  phoneNumber: "081234567891",
+  address: "usertest addresss",
+  role: "buyer",
+};
 
 beforeAll(async() => {
   try {
     
     await User.create(user)
+    await User.create(user1)
+    await User.create(user2)
     const response = await request(app).post("/users/login").send({
       email: "usertest@email.com",
       password: "password",
     });
     access_token = response.body.access_token;
-    // await Transaction.create({
-    //   UserId: 1,
-    //   transactionNumber: "ORDER-ID-165039058294",
-    //   price: 10000,
-    //   status: "pending",
-    //   type: "topup",
-    // })
-    // await Transaction.create({
-    //   UserId: 9999,
-    //   transactionNumber: "ORDER-ID-165039058295",
-    //   price: 10000,
-    //   status: "pending",
-    //   type: "topup",
-    // })
-    // await Transaction.create({
-    //   UserId: 2,
-    //   transactionNumber: "ORDER-ID-165039058296",
-    //   price: 10000,
-    //   status: "success",
-    //   type: "topup",
-    // })
-    await Transaction.bulkCreate([
-      {
-        UserId: 1,
-        transactionNumber: "ORDER-ID-165039058294",
-        price: 10000,
-        status: "pending",
-        type: "topup",
-      },
-      {
-        UserId: 9999,
-        transactionNumber: "ORDER-ID-165039058295",
-        price: 10000,
-        status: "pending",
-        type: "topup",
-      },
-      {
-        UserId: 2,
-        transactionNumber: "ORDER-ID-165039058296",
-        price: 10000,
-        status: "success",
-        type: "topup",
-      }
-    ])
+    await Transaction.create({
+      UserId: 1,
+      transactionNumber: "ORDER-ID-165039058294",
+      price: 10000,
+      status: "pending",
+      type: "topup",
+    })
+    await Transaction.create({
+      UserId: 9999,
+      transactionNumber: "ORDER-ID-165039058295",
+      price: 10000,
+      status: "pending",
+      type: "topup",
+    })
+    await Transaction.create({
+      UserId: 2,
+      transactionNumber: "ORDER-ID-165039058296",
+      price: 10000,
+      status: "success",
+      type: "topup",
+    })
   } catch(err) {
     console.log(err)
   }
@@ -73,6 +73,11 @@ beforeAll(async() => {
 
 afterAll(async () => {
   await User.destroy({
+    truncate: true,
+    cascade: true,
+    restartIdentity: true,
+  });
+  await Transaction.destroy({
     truncate: true,
     cascade: true,
     restartIdentity: true,
@@ -174,21 +179,7 @@ describe("POST /callback/midtrans", () => {
       console.log(err)
     }
   });
-  it("should return with status 404", async () => {
-    try {
-      const res = await request(app)
-      .post("/callback/midtrans")
-      .send({
-        transaction_status: 'settlement',
-        order_id: '999'
-      })
-      expect(res.status).toBe(404);
-      expect(res.body).toEqual(expect.any(Object));
-    } catch (err){
-      console.log(err)
-    }
-  });
-  it("should return with status 404-user not found", async () => {
+  it("should return with status 404-transaction not found", async () => {
     try {
       const res = await request(app)
       .post("/callback/midtrans")
@@ -203,7 +194,7 @@ describe("POST /callback/midtrans", () => {
       console.log(err)
     }
   });
-  it.only("should return with status 403-transaction already settle", async () => {
+  it("should return with status 403-transaction already settle", async () => {
     try {
       const res = await request(app)
       .post("/callback/midtrans")
@@ -211,7 +202,6 @@ describe("POST /callback/midtrans", () => {
         transaction_status: 'settlement',
         order_id: 'ORDER-ID-165039058296'
       })
-      console.log(res.body)
       expect(res.status).toBe(403);
       expect(res.body).toEqual(expect.any(Object));
       expect(res.body).toHaveProperty("message", "transaction already settle");
@@ -225,12 +215,25 @@ describe("POST /callback/midtrans", () => {
       .post("/callback/midtrans")
       .send({
         transaction_status: 'cancel',
-        order_id: 'ORDER-ID-165039058296'
+        order_id: 'ORDER-ID-165039058294'
       })
-      // console.log(res.body)
-      expect(res.status).toBe(500);
+      expect(res.status).toBe(200);
       expect(res.body).toEqual(expect.any(Object));
-      // expect(res.body).toHaveProperty("message", "transaction already settle");
+    } catch (err){
+      console.log(err)
+    }
+  });
+  it("should return with status 404 transaction cancel/expire and not found", async () => {
+    try {
+      const res = await request(app)
+      .post("/callback/midtrans")
+      .send({
+        transaction_status: 'cancel',
+        order_id: 'ORDER-ID-1650390582910'
+      })
+      expect(res.status).toBe(404);
+      expect(res.body).toEqual(expect.any(Object));
+      expect(res.body).toHaveProperty("message", "transaction not found");
     } catch (err){
       console.log(err)
     }

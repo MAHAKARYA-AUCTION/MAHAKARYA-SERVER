@@ -36,21 +36,18 @@ class MidtransController {
       const result = await snap.createTransaction(parameter);
       res.status(201).json(result);
     } catch (err) {
-      console.log(err);
       next(err);
     }
   }
   static async callbackMidtrans(req, res, next) {
     try {
       const { transaction_status, order_id } = req.body;
-      console.log(transaction_status, order_id, "<<<<<<<")
       if (transaction_status === "settlement") {
         let transaction = await Transaction.findOne({
           where: {
             transactionNumber: order_id,
           },
         });
-        console.log(transaction)
         if (!transaction) {
           throw {name: "transaction not found"};
         }
@@ -58,9 +55,7 @@ class MidtransController {
           throw {name: "transaction already settle"};
         }
         const user = await User.findOne({ where: { id: transaction.UserId } });
-        if (!user) {
-          throw {name: "cant find user"};
-        }
+
         await user.update({ balance: user.balance + transaction.price });
         await transaction.update({ status: "success" });
         
@@ -79,13 +74,7 @@ class MidtransController {
           text: `pelanggan ${user.username} telah berhasil topup seharga ${formatRupiah(transaction.price)} dengan nomor transaksi ${order_id}`
         }
         
-        transporter.sendMail(options, function(err, info) {
-          if(err){
-            console.log(err);
-            return;
-          }
-          console.log("sent: "+ info.response);
-        })
+        transporter.sendMail(options, console.log("sent"))
 
       } else if (
         transaction_status === "cancel" ||
@@ -97,13 +86,12 @@ class MidtransController {
           },
         });
         if (!transaction) {
-          throw new Error("transaction not found");
+          throw {name: "transaction not found"};
         }
         await transaction.update({ status: "failed" });
       }
       res.status(200).json({message: "Email Delivered"})
     } catch (err) {
-      console.log(err);
       next(err);
     }
   }

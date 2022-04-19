@@ -3,7 +3,10 @@ function errorHandler(err, req, res, next) {
   let msg = "Internal server error";
 
   console.log(err);
-  console.log("🚀 ~ file: errorHandler.js ~ line 6 ~ errorHandler ~ err.name", err.name);
+  console.log(
+    "🚀 ~ file: errorHandler.js ~ line 6 ~ errorHandler ~ err.name",
+    err.name
+  );
   switch (err.name) {
     case "SequelizeUniqueConstraintError":
     case "SequelizeValidationError":
@@ -32,14 +35,14 @@ function errorHandler(err, req, res, next) {
       msg = "Collection not found";
       code = 404;
       break;
-      case "transaction not found":
+    case "transaction not found":
       msg = "transaction not found";
       code = 404;
       break;
-      case "transaction already settle":
-        msg = "transaction already settle";
-        code = 403;
-        break;
+    case "transaction already settle":
+      msg = "transaction already settle";
+      code = 403;
+      break;
   }
 
   res.status(code).json({ message: msg });
