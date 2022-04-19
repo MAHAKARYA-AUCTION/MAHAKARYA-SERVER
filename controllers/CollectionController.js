@@ -1,6 +1,6 @@
 const { Collection, Lot, Transaction } = require("../models/index");
-const firestore = require("../config/firebase");
-const schedule = require("node-schedule");
+// const firestore = require("../config/firebase");
+// const schedule = require("node-schedule");
 const { closeAuction } = require("../helpers/closeAuction");
 
 class CollectionController {
@@ -8,8 +8,8 @@ class CollectionController {
     try {
       const collections = await Collection.findAll({
         include: {
-          model: Lot
-        }
+          model: Lot,
+        },
       });
       res.status(200).json(collections);
     } catch (error) {
@@ -23,7 +23,7 @@ class CollectionController {
 
       const collection = await Collection.findOne({
         where: { id },
-        include: { model: Lot }
+        include: { model: Lot },
       });
 
       if (!collection) throw { name: "Not found" };
@@ -36,8 +36,7 @@ class CollectionController {
 
   static async addCollection(req, res, next) {
     try {
-      const { name, imgUrl, description, startDate, endDate, galleryName } =
-        req.body;
+      const { name, imgUrl, description, startDate, endDate, galleryName } = req.body;
       const obj = {
         name,
         imgUrl,
@@ -45,17 +44,17 @@ class CollectionController {
         startDate,
         endDate,
         AdminId: req.user.id,
-        galleryName
+        galleryName,
       };
 
       const collection = await Collection.create(obj);
-      if (collection) {
-        const date = new Date(obj.endDate);
-        const job = schedule.scheduleJob(date, function () {
-          console.log("test >>> test >>> test");
-          closeAuction(collection.id || 666);
-        });
-      }
+      // if (collection) {
+      //   const date = new Date(obj.endDate);
+      //   const job = schedule.scheduleJob(date, function () {
+      //     console.log("test >>> test >>> test");
+      //     closeAuction(collection.id || 666);
+      //   });
+      // }
 
       res.status(201).json(collection);
     } catch (error) {
@@ -76,7 +75,7 @@ class CollectionController {
         imgUrl,
         description,
         startDate,
-        endDate
+        endDate,
       };
 
       await Collection.update(obj, { where: { id } });

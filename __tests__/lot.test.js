@@ -203,12 +203,21 @@ describe("GET /lots - SUCCESS TEST FETCH LOT BY ID", () => {
   });
 });
 
-describe("GET /lots - FAILED TEST FETCH LOT BY ID LOT NOT FOUND", () => {
+describe("GET /lots - FAILED TEST FETCH LOT BY ID NOT FOUND", () => {
   it("should return with status 200", async () => {
     const res = await request(app).get("/lots/10");
 
     expect(res.status).toBe(404);
     expect(res.body).toHaveProperty("message", "Data not found");
+  });
+});
+
+describe("GET /lots/collections/:CollectionId - FAILED TEST FETCH LOT BY COLLECTION ID NOT FOUND", () => {
+  it("should return with status 200", async () => {
+    const res = await request(app).get("/lots/collections/10");
+
+    expect(res.status).toBe(404);
+    expect(res.body).toHaveProperty("message", "Collection not found");
   });
 });
 

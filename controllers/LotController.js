@@ -47,6 +47,10 @@ class LotController {
   static async fetchLotsByCollectionId(req, res, next) {
     try {
       const { CollectionId } = req.params;
+
+      const collection = await Collection.findByPk(CollectionId);
+      if (!collection) throw { name: "Collection not found" };
+
       let { name, artistName, startingBid } = req.query;
       let orderBy;
 
