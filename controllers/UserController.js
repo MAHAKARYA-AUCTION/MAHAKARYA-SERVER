@@ -1,7 +1,7 @@
 const { compareHash } = require("../helpers/bcrypt");
 const { signToken } = require("../helpers/jwt");
 const { User, Transaction } = require("../models/index");
-const { hashPassword } = require('../helpers/bcrypt')
+const { hashPassword } = require("../helpers/bcrypt");
 
 class UserController {
   static async register(req, res, next) {
@@ -64,7 +64,7 @@ class UserController {
       const { username, email, password, phoneNumber, address } = req.body;
 
       const user = await User.findByPk(id);
-      if (!user) throw { message: "Not found" };
+      if (!user) throw { name: "Not found" };
 
       const obj = {
         username,
@@ -74,9 +74,9 @@ class UserController {
         address,
         role: user.role,
       };
-      
-      if(password) {
-        obj.password = hashPassword(password)
+
+      if (password) {
+        obj.password = hashPassword(password);
       }
 
       await User.update(obj, { where: { id } });
@@ -106,12 +106,13 @@ class UserController {
       const { id } = req.params;
 
       const user = await User.findByPk(id, {
-        include: [{ model: Transaction }]});
-      if(!user) throw { name: "Not found" };
-      
-      res.status(200).json(user)
+        include: [{ model: Transaction }],
+      });
+      if (!user) throw { name: "Not found" };
+
+      res.status(200).json(user);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 }

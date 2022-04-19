@@ -42,23 +42,24 @@ class MidtransController {
   }
   static async callbackMidtrans(req, res, next) {
     try {
-      console.log({ body: req.body });
       const { transaction_status, order_id } = req.body;
+      console.log(transaction_status, order_id, "<<<<<<<")
       if (transaction_status === "settlement") {
         let transaction = await Transaction.findOne({
           where: {
             transactionNumber: order_id,
           },
         });
+        console.log(transaction)
         if (!transaction) {
-          throw new Error("transaction not found");
+          throw {name: "transaction not found"};
         }
         if (transaction.status === "success") {
-          throw new Error("transaction already settle");
+          throw {name: "transaction already settle"};
         }
         const user = await User.findOne({ where: { id: transaction.UserId } });
         if (!user) {
-          throw new Error("cant find user");
+          throw {name: "cant find user"};
         }
         await user.update({ balance: user.balance + transaction.price });
         await transaction.update({ status: "success" });
@@ -100,6 +101,7 @@ class MidtransController {
         }
         await transaction.update({ status: "failed" });
       }
+      res.status(200).json({message: "Email Delivered"})
     } catch (err) {
       console.log(err);
       next(err);
