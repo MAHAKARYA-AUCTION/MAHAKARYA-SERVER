@@ -32,6 +32,14 @@ function errorHandler(err, req, res, next) {
       msg = "Collection not found";
       code = 404;
       break;
+      case "transaction not found":
+      msg = "transaction not found";
+      code = 404;
+      break;
+      case "transaction already settle":
+        msg = "transaction already settle";
+        code = 403;
+        break;
   }
 
   res.status(code).json({ message: msg });
