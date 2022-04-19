@@ -1,4 +1,4 @@
-const { User } = require("../models/index");
+const { User, Lot, Collection } = require("../models/index");
 const firestore = require("../config/firebase");
 
 class AuctionController {
@@ -6,6 +6,19 @@ class AuctionController {
     try {
       const { lotId } = req.params;
       const { userId, sum } = req.body;
+
+      const lot = await Lot.findOne({
+        include: [{ model: Collection }, { model: User }],
+        where: { id: lotId }
+      });
+
+      if (!lot) {
+        throw new Error("LOT_NOT_FOUND");
+      }
+
+      if (sum <= lot.startingBid) {
+        throw new Error("USER_BID_MUST_HIGHER");
+      }
 
       const highestBid = await firestore
         .collection("HighestBid")
@@ -25,6 +38,10 @@ class AuctionController {
         parseInt(user.balance) - parseInt(user.balanceSpent);
       console.log("sisa: ", availableMoney);
 
+      if (sum > availableMoney) {
+        throw new Error("USER_MONEY_NOT_ENOUGH");
+      }
+
       if (highestBid) {
         const highestBidInfo = await firestore
           .collection("bid")
@@ -34,10 +51,6 @@ class AuctionController {
         const previousUserId = highestBidInfo.get("userId");
         if (sum <= lastPrice) {
           throw new Error("USER_BID_MUST_HIGHER");
-        }
-
-        if (sum > availableMoney) {
-          throw new Error("USER_MONEY_NOT_ENOUGH");
         }
 
         const lastUser = await User.findOne({
@@ -59,6 +72,8 @@ class AuctionController {
         price: +sum,
         userId: +userId,
         lotId: +lotId,
+        lotName: lot.name,
+        lotPainter: lot.artistName,
         username: user.username,
         createdAt: new Date()
       });
@@ -68,7 +83,9 @@ class AuctionController {
         bidID,
         price: +sum,
         userId: +userId,
-        username: user.username
+        username: user.username,
+        lotId: +lotId,
+        collectionId: lot.CollectionId
       });
 
       res.status(200).json({ msg: "Success Bid" });
