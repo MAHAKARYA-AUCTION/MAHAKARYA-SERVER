@@ -47,6 +47,10 @@ class LotController {
   static async fetchLotsByCollectionId(req, res, next) {
     try {
       const { CollectionId } = req.params;
+
+      const collection = await Collection.findByPk(CollectionId);
+      if (!collection) throw { name: "Collection not found" };
+
       let { name, artistName, startingBid } = req.query;
       let orderBy;
 
@@ -102,7 +106,7 @@ class LotController {
 
       const lot = await Lot.create(obj);
 
-      res.status(200).json(lot);
+      res.status(201).json(lot);
     } catch (error) {
       next(error);
     }

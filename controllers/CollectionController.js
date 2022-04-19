@@ -48,13 +48,13 @@ class CollectionController {
       };
 
       const collection = await Collection.create(obj);
-      if (collection) {
-        const date = new Date(obj.endDate);
-        const job = schedule.scheduleJob(date, function () {
-          console.log("test >>> test >>> test");
-          closeAuction(collection.id || 666);
-        });
-      }
+      // if (collection) {
+      //   const date = new Date(obj.endDate);
+      //   const job = schedule.scheduleJob(date, function () {
+      //     console.log("test >>> test >>> test");
+      //     closeAuction(collection.id || 666);
+      //   });
+      // }
 
       res.status(201).json(collection);
     } catch (error) {

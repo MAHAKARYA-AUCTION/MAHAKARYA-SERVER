@@ -52,5 +52,5 @@ const closeAuction = async (collectionId) => {
 };
 
 module.exports = {
-  closeAuction
+  closeAuction,
 };
