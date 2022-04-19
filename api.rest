@@ -1,0 +1,8 @@
+@endpoint = http://localhost:3000
+@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQ3ODQ2OTkxfQ.xxx-XYh2lJaqbBZK1v8zTCLlxeYcmL9cO0nI0S61iIs
+
+###
+POST {{endpoint}}/bid/1 HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+userId=2&sum=100000

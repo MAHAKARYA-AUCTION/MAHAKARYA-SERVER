@@ -1,5 +1,6 @@
+const path = require("path");
 const { User, Lot, Collection } = require("../models/index");
-const firestore = require("../config/firebase");
+const firestore = path.basename("../config/firebase.js");
 
 class AuctionController {
   static async bidAuction(req, res, next) {

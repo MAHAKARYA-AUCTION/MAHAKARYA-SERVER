@@ -1,5 +1,4 @@
 const { Collection, Lot, Transaction } = require("../models/index");
-const firestore = require("../config/firebase");
 const schedule = require("node-schedule");
 const { closeAuction } = require("../helpers/closeAuction");
 
