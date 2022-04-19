@@ -1,5 +1,7 @@
+const path = require("path");
 const { User, Lot, Collection } = require("../models/index");
-const firestore = require("../config/firebase");
+// const firestore = require("../config/firebase");
+const firestore = path.basename("../config/firebase.js");
 
 class AuctionController {
   static async bidAuction(req, res, next) {
@@ -9,7 +11,7 @@ class AuctionController {
 
       const lot = await Lot.findOne({
         include: [{ model: Collection }, { model: User }],
-        where: { id: lotId }
+        where: { id: lotId },
       });
 
       if (!lot) {
@@ -30,12 +32,11 @@ class AuctionController {
 
       const user = await User.findOne({
         where: { id: userId },
-        attributes: ["id", "username", "balance", "balanceSpent"]
+        attributes: ["id", "username", "balance", "balanceSpent"],
       });
 
       console.log(user);
-      const availableMoney =
-        parseInt(user.balance) - parseInt(user.balanceSpent);
+      const availableMoney = parseInt(user.balance) - parseInt(user.balanceSpent);
       console.log("sisa: ", availableMoney);
 
       if (sum > availableMoney) {
@@ -43,10 +44,7 @@ class AuctionController {
       }
 
       if (highestBid) {
-        const highestBidInfo = await firestore
-          .collection("bid")
-          .doc(highestBid)
-          .get();
+        const highestBidInfo = await firestore.collection("bid").doc(highestBid).get();
         const lastPrice = highestBidInfo.get("price");
         const previousUserId = highestBidInfo.get("userId");
         if (sum <= lastPrice) {
@@ -55,16 +53,16 @@ class AuctionController {
 
         const lastUser = await User.findOne({
           where: { id: previousUserId },
-          attributes: ["id", "username", "balanceSpent"]
+          attributes: ["id", "username", "balanceSpent"],
         });
         await lastUser.update({
-          balanceSpent: lastUser.balanceSpent - lastPrice
+          balanceSpent: lastUser.balanceSpent - lastPrice,
         });
         console.log(lastUser.balanceSpent);
       }
 
       await user.update({
-        balanceSpent: parseInt(user.balanceSpent) + parseInt(sum)
+        balanceSpent: parseInt(user.balanceSpent) + parseInt(sum),
       });
 
       const bidRef = firestore.collection("bid");
@@ -75,7 +73,7 @@ class AuctionController {
         lotName: lot.name,
         lotPainter: lot.artistName,
         username: user.username,
-        createdAt: new Date()
+        createdAt: new Date(),
       });
 
       const highestRef = firestore.collection("HighestBid").doc(lotId);
@@ -85,7 +83,7 @@ class AuctionController {
         userId: +userId,
         username: user.username,
         lotId: +lotId,
-        collectionId: lot.CollectionId
+        collectionId: lot.CollectionId,
       });
 
       res.status(200).json({ msg: "Success Bid" });

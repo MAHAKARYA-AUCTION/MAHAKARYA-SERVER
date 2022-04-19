@@ -84,6 +84,15 @@ describe("PUT /users/:id - FAILED TEST UPDATE USER BY ID USER NOT FOUND", () => 
   });
 });
 
+describe("PUT /users/:id - FAILED TEST UPDATE USER BY ID WRONG ACCESS TOKEN", () => {
+  it("should return with status 401", async () => {
+    const res = await request(app).put("/users/100").send({}).set("access_token", "randomtoken");
+
+    expect(res.status).toBe(401);
+    expect(res.body).toHaveProperty("message", "Invalid token");
+  });
+});
+
 describe("DELETE /users/:id - FAILED TEST DELETE USER BY ID NOT FOUND", () => {
   it("should return with status 404", async () => {
     const res = await request(app).delete("/users/1000").set("access_token", access_token);

@@ -124,6 +124,32 @@ describe("POST /lots - FAILED TEST ADD LOT NAME IS NOT PROVIDED", () => {
   });
 });
 
+describe("POST /lots - FAILED TEST ADD ACCESS TOKEN UNDEFINED", () => {
+  it("should return with status 400", async () => {
+    const res = await request(app)
+      .post("/lots")
+      .send({
+        description: "Annibale Carracci - Butcher's Shop (1560-1609)",
+        width: 271,
+        height: 190,
+        size: "271 x 190 cm",
+        startingBid: 15000000,
+        SellerId: 1,
+        CollectionId: 1,
+        primaryImage: "https://res.cloudinary.com/mahakarya/image/upload/v1650263186/paintings/1-2-1_pavtui.jpg",
+        secondImage: "https://res.cloudinary.com/mahakarya/image/upload/v1650263186/paintings/1-2-2_jax2g6.jpg",
+        thirdImage: "https://res.cloudinary.com/mahakarya/image/upload/v1650263185/paintings/1-2-3_mfc4sa.jpg",
+        artistName: "Annibale Carracci",
+        lotNumber: 2,
+      })
+      .set("access_token", "randomaccesstoken");
+
+    console.log(res.body, "ini errornya");
+    expect(res.status).toBe(401);
+    expect(res.body).toHaveProperty("message", "Invalid token");
+  });
+});
+
 describe("GET /lots - SUCCESS TEST FETCH ALL LOTS", () => {
   it("should return with status 200", async () => {
     const res = await request(app).get("/lots");
