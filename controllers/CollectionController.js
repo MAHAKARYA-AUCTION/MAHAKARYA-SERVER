@@ -30,7 +30,7 @@ class CollectionController {
 
   static async addCollection(req, res, next) {
     try {
-      const { name, imgUrl, description, startDate, endDate } = req.body;
+      const { name, imgUrl, description, startDate, endDate, galleryName } = req.body;
       const obj = {
         name,
         imgUrl,
@@ -38,11 +38,12 @@ class CollectionController {
         startDate,
         endDate,
         AdminId: req.user.id,
+        galleryName,
       };
 
       const collection = await Collection.create(obj);
 
-      res.status(200).json(collection);
+      res.status(201).json(collection);
     } catch (error) {
       next(error);
     }

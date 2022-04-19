@@ -102,7 +102,7 @@ class LotController {
 
       const lot = await Lot.create(obj);
 
-      res.status(200).json(lot);
+      res.status(201).json(lot);
     } catch (error) {
       next(error);
     }
