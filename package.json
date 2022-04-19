@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Mahakarya Server",
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "test": "jest --detectOpenHandles --forceExit --runInBand --coverage --silent",
     "dev": "nodemon ./bin/www",
@@ -34,6 +35,7 @@
     "sequelize": "^6.19.0"
   },
   "devDependencies": {
+    "firestore-jest-mock": "^0.17.0",
     "jest": "^27.5.1",
     "nodemon": "^2.0.15",
     "sequelize-cli": "^6.4.1",
