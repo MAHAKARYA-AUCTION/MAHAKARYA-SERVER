@@ -4,7 +4,7 @@
   "description": "Mahakarya Server",
   "main": "app.js",
   "scripts": {
-    "test": "jest --detectOpenHandles --forceExit --runInBand --coverage",
+    "test": "jest --detectOpenHandles --forceExit --runInBand --coverage -silent",
     "dev": "nodemon ./bin/www",
     "start": "nodemon ./bin/www"
   },
