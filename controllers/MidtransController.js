@@ -1,8 +1,9 @@
 const midtransClient = require("midtrans-client");
 const { Transaction, User } = require("../models");
 require("dotenv").config();
-const nodemailer = require('nodemailer')
-const formatRupiah = require('../helpers/formatPrice')
+// const nodemailer = require("nodemailer");
+const formatRupiah = require("../helpers/formatPrice");
+const { transporter } = require("../helpers/nodemailer");
 // const server_key = process.env.SERVER_MIDTRANS;
 // const client_key = process.env.CLIENT_MIDTRANS;
 // const base64 = require('base-64')
@@ -36,14 +37,12 @@ class MidtransController {
       const result = await snap.createTransaction(parameter);
       res.status(201).json(result);
     } catch (err) {
-      console.log(err);
       next(err);
     }
   }
   static async callbackMidtrans(req, res, next) {
     try {
-      console.log({ body: req.body });
-      const { transaction_status, order_id } = req.body;
+      const { transaction_status, order_id, transaction_time, payment_type } = req.body;
       if (transaction_status === "settlement") {
         let transaction = await Transaction.findOne({
           where: {
@@ -51,41 +50,41 @@ class MidtransController {
           },
         });
         if (!transaction) {
-          throw new Error("transaction not found");
+          throw { name: "transaction not found" };
         }
         if (transaction.status === "success") {
-          throw new Error("transaction already settle");
+          throw { name: "transaction already settle" };
         }
         const user = await User.findOne({ where: { id: transaction.UserId } });
-        if (!user) {
-          throw new Error("cant find user");
-        }
+
         await user.update({ balance: user.balance + transaction.price });
         await transaction.update({ status: "success" });
-        
-        const transporter = nodemailer.createTransport({
-          service: 'gmail',
-          auth:{
-            user: 'mahakaryaauction@gmail.com',
-            pass: 'finalprojectp3!',
-          }
-        })
 
         const options = {
-          from: 'mahakaryaauction@gmail.com',
+          attachments: [
+            {
+              filename: "MAHAKARYA_LOGO_bg.png",
+              path: "./views/MAHAKARYA_LOGO_bg.png",
+              cid: "logo",
+            },
+          ],
+          from: "mahakaryaauction@gmail.com",
           to: `${user.email}`,
           subject: `Topup Balance Success!!!`,
-          text: `pelanggan ${user.username} telah berhasil topup seharga ${formatRupiah(transaction.price)} dengan nomor transaksi ${order_id}`
-        }
-        
-        transporter.sendMail(options, function(err, info) {
-          if(err){
-            console.log(err);
-            return;
-          }
-          console.log("sent: "+ info.response);
-        })
+          template: "email",
+          context: {
+            name: `${user.username}`,
+            orderId: `${order_id}`,
+            price: `${formatRupiah(
+              transaction.price
+            )}`,
+            status: `${transaction.status}`,
+            orderTime: `${transaction_time}`,
+            type: `${payment_type}`
+          },
+        };
 
+        transporter.sendMail(options, console.log("sent"));
       } else if (
         transaction_status === "cancel" ||
         transaction_status === "expire"
@@ -96,12 +95,12 @@ class MidtransController {
           },
         });
         if (!transaction) {
-          throw new Error("transaction not found");
+          throw { name: "transaction not found" };
         }
         await transaction.update({ status: "failed" });
       }
+      res.status(200).json({ message: "Email Delivered" });
     } catch (err) {
-      console.log(err);
       next(err);
     }
   }

@@ -18,7 +18,7 @@
     "role": "seller"
   },
   {
-    "username": "buyer1",
+    "username": "david",
     "email": "buyer1@email.com",
     "password": "12345",
     "ktp": "3305040901072053",
@@ -27,7 +27,7 @@
     "role": "buyer"
   },
   {
-    "username": "buyer2",
+    "username": "goliath",
     "email": "buyer2@email.com",
     "password": "12345",
     "ktp": "3321062311110003",
