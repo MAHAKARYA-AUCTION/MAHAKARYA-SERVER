@@ -1,5 +1,5 @@
-const firestore = require("./config/firebase");
-const { Transaction, User } = require("./models");
+const firestore = require("../config/firebase");
+const { Transaction, User } = require("../models");
 
 const closeAuction = async (collectionId) => {
   console.log(collectionId);
