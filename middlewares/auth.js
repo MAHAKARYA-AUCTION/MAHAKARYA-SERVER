@@ -65,18 +65,6 @@ const authZBuyer = async (req, res, next) => {
   }
 };
 
-// const authZSeller = async (req, res, next) => {
-//   try {
-//     const { role } = req.user;
-
-//     if (role !== "seller") throw { name: "Forbidden" };
-
-//     next();
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-
 const authZAdmin = async (req, res, next) => {
   try {
     const { role } = req.user;
@@ -93,6 +81,5 @@ module.exports = {
   authNUser,
   authNAdmin,
   authZBuyer,
-  // authZSeller,
   authZAdmin,
 };

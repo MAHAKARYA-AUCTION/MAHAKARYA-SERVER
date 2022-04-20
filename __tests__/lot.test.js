@@ -77,7 +77,7 @@ describe("POST /lots - SUCCESS TEST ADD LOT", () => {
         secondImage: "https://res.cloudinary.com/mahakarya/image/upload/v1650263186/paintings/1-2-2_jax2g6.jpg",
         thirdImage: "https://res.cloudinary.com/mahakarya/image/upload/v1650263185/paintings/1-2-3_mfc4sa.jpg",
         artistName: "Annibale Carracci",
-        lotNumber: 2,
+        lotNumber: 1,
       })
       .set("access_token", access_token);
 
@@ -115,7 +115,7 @@ describe("POST /lots - FAILED TEST ADD LOT NAME IS NOT PROVIDED", () => {
         secondImage: "https://res.cloudinary.com/mahakarya/image/upload/v1650263186/paintings/1-2-2_jax2g6.jpg",
         thirdImage: "https://res.cloudinary.com/mahakarya/image/upload/v1650263185/paintings/1-2-3_mfc4sa.jpg",
         artistName: "Annibale Carracci",
-        lotNumber: 2,
+        lotNumber: 1,
       })
       .set("access_token", access_token);
 
@@ -140,7 +140,7 @@ describe("POST /lots - FAILED TEST ADD ACCESS TOKEN UNDEFINED", () => {
         secondImage: "https://res.cloudinary.com/mahakarya/image/upload/v1650263186/paintings/1-2-2_jax2g6.jpg",
         thirdImage: "https://res.cloudinary.com/mahakarya/image/upload/v1650263185/paintings/1-2-3_mfc4sa.jpg",
         artistName: "Annibale Carracci",
-        lotNumber: 2,
+        lotNumber: 1,
       })
       .set("access_token", "randomaccesstoken");
 

@@ -99,6 +99,7 @@ class AuctionController {
         code = 400;
       }
       res.status(code).json({ msg });
+      console.log(error);
     }
   }
 }
