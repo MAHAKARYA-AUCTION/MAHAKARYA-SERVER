@@ -1,7 +1,7 @@
 const { Collection, Lot, Transaction } = require("../models/index");
 // const firestore = require("../config/firebase");
 // const schedule = require("node-schedule");
-const { closeAuction } = require("../helpers/closeAuction");
+// const { closeAuction } = require("../helpers/closeAuction");
 
 class CollectionController {
   static async fetchCollections(req, res, next) {
