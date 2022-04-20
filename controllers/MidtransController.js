@@ -36,13 +36,11 @@ class MidtransController {
       const result = await snap.createTransaction(parameter);
       res.status(201).json(result);
     } catch (err) {
-      console.log(err);
       next(err);
     }
   }
   static async callbackMidtrans(req, res, next) {
     try {
-      console.log({ body: req.body });
       const { transaction_status, order_id } = req.body;
       if (transaction_status === "settlement") {
         let transaction = await Transaction.findOne({
@@ -51,15 +49,13 @@ class MidtransController {
           },
         });
         if (!transaction) {
-          throw new Error("transaction not found");
+          throw {name: "transaction not found"};
         }
         if (transaction.status === "success") {
-          throw new Error("transaction already settle");
+          throw {name: "transaction already settle"};
         }
         const user = await User.findOne({ where: { id: transaction.UserId } });
-        if (!user) {
-          throw new Error("cant find user");
-        }
+
         await user.update({ balance: user.balance + transaction.price });
         await transaction.update({ status: "success" });
         
@@ -78,13 +74,7 @@ class MidtransController {
           text: `pelanggan ${user.username} telah berhasil topup seharga ${formatRupiah(transaction.price)} dengan nomor transaksi ${order_id}`
         }
         
-        transporter.sendMail(options, function(err, info) {
-          if(err){
-            console.log(err);
-            return;
-          }
-          console.log("sent: "+ info.response);
-        })
+        transporter.sendMail(options, console.log("sent"))
 
       } else if (
         transaction_status === "cancel" ||
@@ -96,12 +86,12 @@ class MidtransController {
           },
         });
         if (!transaction) {
-          throw new Error("transaction not found");
+          throw {name: "transaction not found"};
         }
         await transaction.update({ status: "failed" });
       }
+      res.status(200).json({message: "Email Delivered"})
     } catch (err) {
-      console.log(err);
       next(err);
     }
   }
