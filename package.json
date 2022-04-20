@@ -1,0 +1,42 @@
+{
+  "name": "mahakarya-server",
+  "version": "1.0.0",
+  "description": "Mahakarya Server",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest --detectOpenHandles --forceExit --runInBand --coverage",
+    "dev": "nodemon ./bin/www",
+    "start": "nodemon ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MAHAKARYA-AUCTION/MAHAKARYA-SERVER.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MAHAKARYA-AUCTION/MAHAKARYA-SERVER/issues"
+  },
+  "homepage": "https://github.com/MAHAKARYA-AUCTION/MAHAKARYA-SERVER#readme",
+  "dependencies": {
+    "base-64": "^1.0.0",
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "firebase-admin": "^10.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "midtrans-client": "^1.3.1",
+    "node-schedule": "^2.1.0",
+    "nodemailer": "^6.7.3",
+    "pg": "^8.7.3",
+    "sequelize": "^6.19.0"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "sequelize-cli": "^6.4.1",
+    "supertest": "^6.2.2"
+  }
+}

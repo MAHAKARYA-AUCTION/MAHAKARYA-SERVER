@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Realism",
+    "imgUrl": "https://res.cloudinary.com/mahakarya/image/upload/v1650263195/paintings/collection-1_z7bs82.jpg",
+    "description": "Realism in the arts is generally the attempt to represent subject matter truthfully, without artificiality and avoiding speculative fiction and supernatural elements. The term is often used interchangeably with naturalism, even though these terms are not synonymous.",
+    "startDate": "2022-04-15T09:00:00+0700",
+    "endDate": "2022-04-23T21:00:00+0700",
+    "galleryName": "goliath-gallery",
+    "AdminId": 1
+  },
+  {
+    "name": "Surrealism",
+    "imgUrl": "https://res.cloudinary.com/mahakarya/image/upload/v1650263195/paintings/collection-2_m4oqre.jpg",
+    "description": "Surrealism is a cultural movement that developed in Europe in the aftermath of World War I in which artists depicted unnerving, illogical scenes and developed techniques to allow the unconscious mind to express itself.",
+    "startDate": "2022-05-01T09:00:00+0700",
+    "endDate": "2022-05-15T21:00:00+0700",
+    "galleryName": "david-gallery",
+    "AdminId": 1
+  },
+  {
+    "name": "Traditional Chinese",
+    "imgUrl": "https://ids.lib.harvard.edu/ids/view/18724209?width=3000&height=3000",
+    "description": "While the earliest known paintings in East Asia were painted on the walls of tombs, during the last two millennia, a variety of distinctive portable formats for viewing and storing paintings and calligraphy were developed and are common, with certain nuances, to all three countries of China, Korea, and Japan. Typically, paintings and calligraphy are created by an artist on sheets of paper or silk laid on a flat surface. The finished work is then mounted on a support system in the suitable format. Because a water-soluble glue is traditionally used to adhere the picture to the mounting, the two can be separated and the latter replaced from time to time to help preserve the work of art. In all cases, it has never been the tradition in East Asia to display works of art for long periods of time. They are shown for short occasions and then put away in storage.",
+    "startDate": "2022-03-01T09:00:00+0700",
+    "endDate": "2022-03-27T21:00:00+0700",
+    "galleryName": "david-gallery",
+    "AdminId": 1
+  },
+  {
+    "name": "American",
+    "imgUrl": "https://ids.lib.harvard.edu/ids/view/17804723?width=3000&height=3000",
+    "description": "Before colonization there were many flourishing traditions of Native American art, and where the Spanish colonized Spanish Colonial architecture and the accompanying styles in other media were quickly in place. Early colonial art on the East Coast initially relied on artists from Europe, with John White (1540-c. 1593) the earliest example. In the late 18th and early 19th centuries, artists primarily painted portraits, and some landscapes in a style based mainly on English painting. Furniture-makers imitating English styles and similar craftsmen were also established in the major cities, but in the English colonies, locally made pottery remained resolutely utilitarian until the 19th century, with fancy products imported.",
+    "startDate": "2022-02-02T09:00:00+0700",
+    "endDate": "2022-02-25T21:00:00+0700",
+    "galleryName": "david-gallery",
+    "AdminId": 1
+  }
+]

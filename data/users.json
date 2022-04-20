@@ -1,0 +1,38 @@
+[
+  {
+    "username": "seller1",
+    "email": "seller1@email.com",
+    "password": "12345",
+    "ktp": "3321110902070002",
+    "phoneNumber": "08123456789",
+    "address": "Rumah Seller 1",
+    "role": "seller"
+  },
+  {
+    "username": "seller2",
+    "email": "seller2@email.com",
+    "password": "12345",
+    "ktp": "3321060902150009",
+    "phoneNumber": "08123456789",
+    "address": "Rumah Seller 2",
+    "role": "seller"
+  },
+  {
+    "username": "buyer1",
+    "email": "buyer1@email.com",
+    "password": "12345",
+    "ktp": "3305040901072053",
+    "phoneNumber": "08123456789",
+    "address": "Rumah Buyer 1",
+    "role": "buyer"
+  },
+  {
+    "username": "buyer2",
+    "email": "buyer2@email.com",
+    "password": "12345",
+    "ktp": "3321062311110003",
+    "phoneNumber": "08123456789",
+    "address": "Rumah Buyer 2",
+    "role": "buyer"
+  }
+]
