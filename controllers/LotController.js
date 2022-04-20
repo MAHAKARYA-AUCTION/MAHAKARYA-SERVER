@@ -1,14 +1,14 @@
 const { Lot, Collection, User } = require("../models/index");
 const { Op } = require("sequelize");
-
+const { sequelize } = require("../models/index");
 class LotController {
   static async fetchLots(req, res, next) {
     try {
       let { name, artistName, startingBid } = req.query;
       let orderBy;
-
       if (!name) name = "";
       if (!artistName) artistName = "";
+
       if (!startingBid) {
         orderBy = ["id", "ASC"];
       } else if (startingBid === "ASC") {
@@ -18,10 +18,7 @@ class LotController {
       }
 
       const lots = await Lot.findAll({
-        where: {
-          name: { [Op.iLike]: `%${name}%` },
-          artistName: { [Op.iLike]: `%${artistName}%` },
-        },
+        where,
         order: [orderBy],
       });
       res.status(200).json(lots);
@@ -47,11 +44,86 @@ class LotController {
   static async fetchLotsByCollectionId(req, res, next) {
     try {
       const { CollectionId } = req.params;
-      let { name, artistName, startingBid } = req.query;
+      let { name, artistName, startingBid, priceValue, orientation, size } = req.query;
       let orderBy;
 
       if (!name) name = "";
       if (!artistName) artistName = "";
+
+      let where = {
+        CollectionId,
+        name: { [Op.iLike]: `%${name}%` },
+        artistName: { [Op.iLike]: `%${artistName}%` },
+      }
+
+      if (priceValue) {
+        where = {
+          ...where,
+          startingBid: { [Op.between]: [priceValue[0], priceValue[1]] }
+        }
+      }
+
+      if (orientation) {
+        if (orientation === "landscape") {
+          where = {
+            ...where,
+            width: {
+              [Op.gt]
+                : sequelize.col('height')
+            }
+          }
+        } else {
+          where = {
+            ...where,
+            width: {
+              [Op.lt]
+                : sequelize.col('height')
+            }
+          }
+        }
+      }
+      //  < 100 small , 100 - 150 medium, > 150 large
+      if (size) {
+        if (size === "big") {
+          where = {
+            ...where,
+            width: {
+              [Op.gt]
+                : 150
+            },
+            height: {
+              [Op.gt]
+                : 100
+            }
+          }
+        } else if (size === "medium") {
+          where = {
+            ...where,
+            width: {
+              [Op.between]
+                : [100, 150]
+            },
+            height: {
+              [Op.between]
+                : [65, 100]
+            }
+          }
+
+        } else {
+          where = {
+            ...where,
+            width: {
+              [Op.lt]
+                : 100
+            },
+            height: {
+              [Op.lt]
+                : 65
+            }
+          }
+        }
+      }
+
       if (!startingBid) {
         orderBy = ["id", "ASC"];
       } else if (startingBid === "ASC") {
@@ -61,11 +133,7 @@ class LotController {
       }
 
       const lots = await Lot.findAll({
-        where: {
-          CollectionId,
-          name: { [Op.iLike]: `%${name}%` },
-          artistName: { [Op.iLike]: `%${artistName}%` },
-        },
+        where,
         order: [orderBy],
       });
 
