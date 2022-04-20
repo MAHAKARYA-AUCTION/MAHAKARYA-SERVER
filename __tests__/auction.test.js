@@ -87,18 +87,6 @@ afterAll(async () => {
   });
 });
 
-describe("POST /bid/:lotId - SUCCESS TEST ADD LOT", () => {
-  it("should return with status 200", async () => {
-    const res = await request(app).post("/bid/1").send({
-      userId: 2,
-      sum: 15500000,
-    });
-
-    console.log(res.body, "resbody error");
-    expect(res.status).toBe(200);
-  });
-});
-
 describe("POST /bid/:lotId - FAILED TEST ADD BID", () => {
   it("should return with status 500", async () => {
     const res = await request(app).post("/bid/1").send({
