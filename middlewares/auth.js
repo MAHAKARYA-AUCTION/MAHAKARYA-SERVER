@@ -44,7 +44,6 @@ const authNAdmin = async (req, res, next) => {
       id: admin.id,
       username: admin.username,
       email: admin.email,
-      role: "admin",
     };
 
     next();
@@ -65,21 +64,8 @@ const authZBuyer = async (req, res, next) => {
   }
 };
 
-const authZAdmin = async (req, res, next) => {
-  try {
-    const { role } = req.user;
-
-    if (role !== "admin") throw { name: "Forbidden" };
-
-    next();
-  } catch (error) {
-    next(error);
-  }
-};
-
 module.exports = {
   authNUser,
   authNAdmin,
   authZBuyer,
-  authZAdmin,
 };
