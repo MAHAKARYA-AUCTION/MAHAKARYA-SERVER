@@ -230,7 +230,7 @@ describe("GET /lots - SUCCESS TEST FETCH LOT BY ID", () => {
 });
 
 describe("GET /lots - FAILED TEST FETCH LOT BY ID NOT FOUND", () => {
-  it("should return with status 200", async () => {
+  it("should return with status 404", async () => {
     const res = await request(app).get("/lots/10");
 
     expect(res.status).toBe(404);
@@ -282,6 +282,15 @@ describe("DELETE /lots - SUCCESS TEST DELETE LOT BY ID", () => {
 describe("DELETE /lots - FAILED TEST DELETE LOT BY ID NOT FOUND", () => {
   it("should return with status 404", async () => {
     const res = await request(app).delete("/lots/1000").set("access_token", access_token);
+
+    expect(res.status).toBe(404);
+    expect(res.body).toHaveProperty("message", "Data not found");
+  });
+});
+
+describe("PUT /lots - FAILED TEST PUT LOT BY ID NOT FOUND", () => {
+  it("should return with status 404", async () => {
+    const res = await request(app).put("/lots/1000").set("access_token", access_token);
 
     expect(res.status).toBe(404);
     expect(res.body).toHaveProperty("message", "Data not found");

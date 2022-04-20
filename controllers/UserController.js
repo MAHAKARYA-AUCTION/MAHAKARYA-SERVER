@@ -69,6 +69,7 @@ class UserController {
       const obj = {
         username,
         email,
+        password,
         ktp: user.ktp,
         phoneNumber,
         address,
