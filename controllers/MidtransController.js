@@ -3,6 +3,7 @@ const { Transaction, User } = require("../models");
 require("dotenv").config();
 const nodemailer = require('nodemailer')
 const formatRupiah = require('../helpers/formatPrice')
+const { transporter } = require('../helpers/nodemailer')
 // const server_key = process.env.SERVER_MIDTRANS;
 // const client_key = process.env.CLIENT_MIDTRANS;
 // const base64 = require('base-64')
@@ -58,16 +59,20 @@ class MidtransController {
 
         await user.update({ balance: user.balance + transaction.price });
         await transaction.update({ status: "success" });
-        
-        const transporter = nodemailer.createTransport({
-          service: 'gmail',
-          auth:{
-            user: 'mahakaryaauction@gmail.com',
-            pass: 'finalprojectp3!',
-          }
-        })
 
         const options = {
+          attachments: [
+            {
+              filename: "Midtrans.png",
+              path: "./views/Midtrans.png",
+              cid: "midtrans",
+            },
+            {
+              filename: "MAHAKARYA_LOGO_bg.png",
+              path: "./views/MAHAKARYA_LOGO_bg.png",
+              cid: "logo",
+            },
+          ],
           from: 'mahakaryaauction@gmail.com',
           to: `${user.email}`,
           subject: `Topup Balance Success!!!`,
