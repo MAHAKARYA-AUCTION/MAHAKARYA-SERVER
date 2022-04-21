@@ -1,11 +1,18 @@
 const firestore = require("../config/firebase");
-const { Transaction, User } = require("../models");
+const { Transaction, User, Collection } = require("../models");
 
-const closeAuction = async () => {
-  // console.log(collectionId);
+const closeAuction = async (collectionId) => {
+  console.log(collectionId);
   // console.log("------------------ TEST ------------------");
-  const highestBid = await firestore.collection("HighestBid").get();
+  const highestBid = await firestore.collection("HighestBid").where('collectionId', "==", collectionId).get();
   let listHighest = highestBid.docs.map((doc) => doc.data());
+  console.log(listHighest);
+
+  await Collection.update({ endDate : new Date() }, {
+    where: {
+      id: collectionId,
+    },
+  });
 
   //create transaction
   if (listHighest.length > 0) {
@@ -45,6 +52,7 @@ const closeAuction = async () => {
     //let listUserTotalSpent = Object.entries(user);
     listUserTotalSpent.forEach(async (e) => {
       await User.findOne({ where: { id: e.id } }).then((user) => {
+        user.update({balanceSpent: 0});
         return user.increment("balance", { by: -e.balance });
       });
     });
@@ -55,4 +63,4 @@ const closeAuction = async () => {
 //   closeAuction
 // };
 
-closeAuction();
+closeAuction(1);
