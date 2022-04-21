@@ -52,8 +52,8 @@ const closeAuction = async (collectionId) => {
     //let listUserTotalSpent = Object.entries(user);
     listUserTotalSpent.forEach(async (e) => {
       await User.findOne({ where: { id: e.id } }).then((user) => {
-        user.update({balanceSpent: 0});
-        return user.increment("balance", { by: -e.balance });
+        await user.update({balanceSpent: 0});
+        return await user.increment("balance", { by: -e.balance });
       });
     });
   }
