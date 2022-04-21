@@ -1,7 +1,7 @@
 const { Collection, Lot, Transaction } = require("../models/index");
 const firestore = require("../config/firebase");
 const schedule = require("node-schedule");
-const { closeAuction } = require("../helpers/closeAuction");
+// const { closeAuction } = require("../helpers/closeAuction");
 
 class CollectionController {
   static async fetchCollections(req, res, next) {
@@ -51,10 +51,10 @@ class CollectionController {
       const collection = await Collection.create(obj);
       if (collection) {
         const date = new Date(obj.endDate);
-        const job = schedule.scheduleJob(date, function () {
-          console.log("test >>> test >>> test");
-          closeAuction(collection.id || 666);
-        });
+        // const job = schedule.scheduleJob(date, function () {
+        //   console.log("test >>> test >>> test");
+        //   closeAuction(collection.id || 666);
+        // });
       }
 
       res.status(201).json(collection);
