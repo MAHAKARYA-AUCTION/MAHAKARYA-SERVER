@@ -5,12 +5,12 @@ const authNUser = async (req, res, next) => {
   try {
     const { access_token } = req.headers;
     if (!access_token) throw { name: "JsonWebTokenError" };
-
+    
     const payload = verifyToken(access_token);
-
+    
     if (!payload) throw { name: "JsonWebTokenError" };
-
-    const user = await User.findOne({ where: { id: payload.id, email: payload.email } });
+    
+    const user = await User.findOne({ where: { id: payload.id } });
 
     if (!user) throw { name: "JsonWebTokenError" };
 
