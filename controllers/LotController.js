@@ -4,23 +4,7 @@ const { sequelize } = require("../models/index");
 class LotController {
   static async fetchLots(req, res, next) {
     try {
-      let { name, artistName, startingBid } = req.query;
-      let orderBy;
-      if (!name) name = "";
-      if (!artistName) artistName = "";
-
-      if (!startingBid) {
-        orderBy = ["id", "ASC"];
-      } else if (startingBid === "ASC") {
-        orderBy = ["startingBid", "ASC"];
-      } else {
-        orderBy = ["startingBid", "DESC"];
-      }
-
-      const lots = await Lot.findAll({
-        where,
-        order: [orderBy],
-      });
+      const lots = await Lot.findAll();
       res.status(200).json(lots);
     } catch (error) {
       next(error);
